@@ -1,0 +1,48 @@
+<% layout("layouts/boilerplate")%>
+
+<div class="container d-flex justify-content-center align-items-center mb-3">
+  <div class="row">
+    <div class="col-8 offset-2 col-md-6 offset-md-3">
+      <div class="card shadow">
+      <img src="https://ecoportal.info/wp-content/uploads/2017/02/pesec-544x386.jpg" alt="" class="card-image-top">
+        <!-- <img src="https://cherepah.ru/wp-content/uploads/b/5/a/b5aaeda5fe9006b5f4665955501b6a5a.jpg" alt="" class="card-image-top"> -->
+        <div class="card-body">
+          <h5 class="card-title">Напиши нам</h5>
+          <div class="card-text">
+          <p>Все вопросы и предложения будут внимательно рассмотрены, 
+             а те, которые интересны всем участникам, будут опубликованы в разделе "Новости".</p>
+       </div>
+          <form action="/writeUs" method="POST" class="validated-form" novalidate>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="feedback[username]"
+              class="form-control"
+              autofocus
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="body" class="form-label d-block">Твой вопрос или предложение:</label>
+           <textarea name="feedback[body]" id="body" cols="40" rows="5" required></textarea>
+          </div>
+          <!-- <label for="address" class="form-label">Если хочешь получить ответ
+             на электронную почту, укажи адрес(email), если нет, напиши "нет":</label>
+          <input
+            type="text"
+            id="address"
+            name="feedback[address]"
+            class="form-control mb-3"
+            required
+          /> -->
+          <button class="btn btn-success btn-block">Отправить</button>
+          <a href="/" class="btn btn-secondary btn-block">Вернуться</a>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+

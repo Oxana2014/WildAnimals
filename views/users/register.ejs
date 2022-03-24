@@ -1,0 +1,31 @@
+<% layout("layouts/boilerplate")%>
+
+<div class="container d-flex justify-content-center align-items-center mb-3">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="card shadow">
+        <img src="https://tourweek.ru/upload/resize_cache/main/60c/800_99999_1/60c9888acd32cbe5d68e49a647a50517.jpg" alt="" class="card-image-top">
+        <div class="card-body">
+          <h5 class="card-title">Register</h5>
+          <form action="/register" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-label" >Username</label>
+                <input type="text" id="username" name="username" class="form-control" autofocus required />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label" >Email, Если у тебя нет адреса электронной почты, можешь вписать любой выдуманный (например ira@ira.ru), только ни за кем не повторяй</label>
+                <input type="email" id="email" name="email" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label" >Придумай себе пароль, не меньше 6 символов, и никому его не говори.(Родителям, конечно, можно!)</label>
+                <input type="password" id="password" name="password" class="form-control" required />
+              </div>
+              <button class="btn btn-success btn-block">Зарегистрировать!</button>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+

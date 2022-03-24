@@ -1,0 +1,333 @@
+<% layout("layouts/boilerplate")%>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3 ">
+  <h1 class="text-center <%=animal.status%> mb-3 text-white pb-2"><%= animal.title %></h1>
+  <% if(animal.images.length > 1) { %> 
+  <div
+      id="WildAnimalsCarousel"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <% animal.images.forEach((image, i) => { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+         <% if(image.vertical) { %>
+          <img src="<%=image.toHorizontal%>" class="d-block w-100"  alt="">
+         <% } else { %> 
+          <img src="<%=image.url%>" class="d-block w-100" alt="" />
+        <% } %>
+        </div>
+        <% }) %>
+      </div>
+      <% if(animal.images.length > 1) { %>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#WildAnimalsCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#WildAnimalsCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <% } %>
+    </div>
+<% } else if(animal.images.length === 1) { %>
+  <img src="<%=animal.images[0].url%>" class="d-block one-image " alt="" />
+  <% } %>
+  <!-- end of carousel -->
+   <div class="card mb-3"></div>
+  
+  <div>
+    <p>Охранный статус: </p>
+    <div class="status <%=animal.status%>">
+   <% if (animal.status === "extinct") { %>
+<h5 class="text-center  py-1">Исчезнувшие в дикой природе</h5>
+    <% } else if(animal.status === "endangered") { %>
+<h5 class="text-center py-1">Вымирающие виды</h5>
+  <% } else if (animal.status === "vulnerable") { %>
+<h5 class="text-center py-1">Уязвимые виды</h5>
+ <% } else if(animal.status === "dependant") { %>
+<h5 class="text-center py-1">Зависимы от усилий по сохранению</h5>
+ <% } else if (animal.status === "least-concern") { %>
+<h5 class="text-center py-1">Вызывающие наименьшие опасения</h5>
+ <% } else { %>
+<h5 class="text-center py-1">Не определен</h5>
+ <% } %>
+</div>
+  </div>
+   
+      <div class="card-body">
+       
+        <p class="card-text"><%= animal.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-muted">
+          Место обитания: <%= animal.areal %>
+        </li>
+        <% if(animal.map && animal.map !== "https://www.google.com") { %>
+          <div >
+            <h6>Ареал обитания на карте:</h6>         
+            <img src="<%=animal.map%>" alt="" class="one-image areal" />
+            <p>Источник: Википедия</p>
+        
+          </div>
+          <% } %>
+        <!-- <li class="list-group-item ">
+          Значок на карте: <%= animal.location %>
+        </li> -->
+
+        <div id="map"></div>
+      
+        <li class="list-group-item">
+          Источник информации: <%= animal.source %>
+        </li>
+      </ul>
+        <h5 class="mb-3 mt-3">Автор: <%= animal.author.username %></h5>
+
+        <hr>
+      <% if( currentUser && currentUser.role === "moderator") { %>
+      <div class="card-body">
+        <a class="card-link btn btn-success" href="/animals/<%=animal._id%>/avatar"
+          >Добавить аватар</a
+        >
+        <a class="card-link btn btn-info" href="/animals/<%=animal._id%>/edit"
+          >Edit</a
+        >
+        <form
+          class="d-inline"
+          action="/animals/<%=animal._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+      <% } %>
+    </div>
+  
+    <div class="col-md-6 offset-md-3 ">
+    <!-- additions -->
+    <% if(animal.additions && animal.additions.length) { %>
+    <h3 class="mb-3">Вот что добавили наши читатели:</h3>
+    <% } %>
+     <% animal.additions.forEach((addition, i) => { %> 
+      <% if(addition.moderate !== "new") { %>
+      <div class="card mb-3 text-dark bg-light <%=animal.status%> rounded">
+           
+        <% if (addition.images.length > 1){ %>
+        <!-- carousel -->
+    <div
+      id="AdditionCarousel-<%=i%>"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <% addition.images.forEach((image, i) => { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+         <% if (image.vertical) { %>
+          <img src="<%=image.toHorizontal%>" class="d-block w-100" alt="" />
+        <%  } else { %>
+          <img src="<%=image.url%>" class="d-block w-100" alt="" />
+        <%  } %>
+        </div>
+        <% }) %>
+      </div>
+      <% if(addition.images.length > 1) { %>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#AdditionCarousel-<%=i%>"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#AdditionCarousel-<%=i%>"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <% } %>
+    </div>
+<% } else if (addition.images.length === 1) { %>
+  <!-- one image without carousel -->
+  <% if (addition.images[0].vertical) { %>
+    <img src="<%=addition.images[0].toHorizontal%>" class="d-block one-image " alt="" />
+    <% } else { %>
+  <img src="<%=addition.images[0].url%>" class="d-block one-image " alt="" />
+ <% } %>
+  <% } %>
+    <div class="">
+      <% if(addition.author) { %>
+      <h5 class="card-title">Добавил(а): <%=addition.author.username %></h5>
+      <% } %>
+
+      <div class="card-body">
+        <div class="card-text">
+          <p><%=addition.body%></p>
+        </div>
+        <div class="text-muted">
+          <label for="">Источник: </label>
+          <p><%=addition.source%></p>
+        </div>
+        <% if(currentUser && currentUser.role === "moderator") { %>
+          <div class="card-body">
+            <a class="card-link btn btn-info" href="/animals/<%=animal._id%>/additions/<%=addition._id%>/editAddition"
+              >Edit</a>
+          <form
+          class="d-inline"
+          action="/animals/<%=animal._id%>/additions/<%=addition._id%>?_method=DELETE"
+          method="POST" >
+          <button class=" btn btn-danger">Delete</button>
+        </form>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+   <% } %>
+    <% }) %>
+
+    <!-- for moderator -->
+    <% if(currentUser && currentUser.role === "moderator") { %>
+      <% animal.additions.forEach((addition, i) => { %> 
+      <% if(addition.moderate === "new") { %>
+        <div class="card moderate-new">
+        <div 
+          id="AdditionCarousel-<%=i%>"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <% addition.images.forEach((image, i) => { %>
+            <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+              <img src="<%=image.url%>" class="d-block w-100" alt="" />
+            </div>
+            <% }) %>
+          </div>
+          <% if(addition.images.length > 1) { %>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#AdditionCarousel-<%=i%>"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#AdditionCarousel-<%=i%>"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+          <% } %>
+        </div>
+    
+        <div class="mb-3 text-dark bg-light border-success rounded">
+          <% if(addition.author) { %>
+          <h5 class="card-title">Добавил(а): <%=addition.author.username %></h5>
+          <% } %>
+    
+          <div class="card-body">
+            <div class="card-text">
+              <p><%=addition.body%></p>
+            </div>
+            <div class="text-muted">
+              <label for="">Источник: </label>
+              <p><%=addition.source%></p>
+            </div>
+            <% if(currentUser && currentUser.role === "moderator") { %>
+            <form
+              action="/animals/<%=animal._id%>/additions/<%=addition._id%>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn-sm btn btn-danger">Delete</button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+        <% } %>
+        <% }) %>
+      <% } %>
+
+    <!-- new addition -->
+    <h3>А ты знаешь что-то еще об этом животном?</h3>
+    <% if (currentUser) { %>
+    <form
+      class="mb-3 validated-form"
+      action="/animals/<%=animal._id%>/additions"
+      method="POST"
+      enctype="multipart/form-data"
+      novalidate
+    >
+      <div class="mb-3">
+        <label class="form-label" for="body">
+          Напиши, чтобы это узнали другие</label
+        >
+        <textarea
+          class="form-control"
+          name="addition[body]"
+          id="body"
+          cols="30"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+
+      <label class="form-label mb-3" for="image">Есть ещё фото?</label>
+      <div class="input-group mb-3">
+        <input
+          type="file"
+          class="form-control"
+          id="image"
+          name="image"
+          multiple
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="source"
+          >Укажи источники информации:</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          name="addition[source]"
+          id="source"
+          required
+        />
+      </div>
+      <button class="btn btn-success ">Добавить</button>
+    </form>
+    <% } else { %>
+    <h3>Авторизуйся, и сможешь добавить свое!</h3>
+
+    <a href="/login" class="btn btn-success mb-3 me-3">Войти</a>
+    <a href="/register" class="btn btn-success mb-3">Зарегистрироваться</a>
+    <% } %>
+  </div>
+</div>
+</div>
+<script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const animal = <%-JSON.stringify(animal)%>
+</script>
+<script src="/javascripts/showPageMap.js"></script>

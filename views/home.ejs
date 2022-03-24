@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WildAnimals</title>
+    <link rel="icon" type="image/x-icon" href="/assets/icon-fox.png">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Rubik Beastly">
+  <!-- Lemonada   Courgette   Bakbak One   Rubik Beastly  Aladin -->
+    <link rel="stylesheet" href="/stylesheets/home.css" />
+  </head>
+  <body class="d-flex  text-center text-white bg-dark ">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">
+      <header class="mb-auto">
+        <div>
+          <!-- <h3 class="float-md-start mb-0">Wild Animals</h3> -->
+          <div class="dropdown float-md-start mb-0">
+            <a class="btn btn-success btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Узнай больше
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#projectModal">О проекте</a></li>
+              <li><a class="dropdown-item" href="/writeus">Напиши нам</a></li>
+              <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#newsModal">Новости</a></li>
+            </ul>
+          </div>
+
+          <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal project-->
+<div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="projectModalLabel">О проекте</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <h5 class="modal-body text-dark text-lg">
+        Это некоммерческий проект для школьников, интересующихся жизнью диких животных и
+         возможностью спасти их от вымирания. Приглашаем всех желающих публиковать интересные
+          факты и фотографии. <br>  Мы не собираем и не храним персональные данные участников.
+          <br> Мы уважаем авторские права и просим наших участников указывать источники информации и фото. <br>
+           </h5>
+  
+       <h5 class="text-dark text-lg"> This is real-life non-commercial project for schoolchildren. 
+        The purpose of project is to learn about wild animals, post interesting facts and photos,
+         help others to know more  wild life around us.<br>  We invite to contribute everyone<br>  who is interested this topic. <br>
+         We do not store members' personal data.<br> 
+We respect copyrights and ask our participants to point out the sources of information and photos.
+      </h5>
+      <p  class="text-dark text-lg">P.S. Ответственность за содержание поста несет его автор.  </p> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Закрыть</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal news -->
+<div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="newsModalLabel">Наши новости:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+     
+        <div class="card card-body">
+            <% if(news.length > 0) { %>
+                <div class="list-group ">
+                <% for (let i = news.length-1; i >=0; i--) { %>
+        <div class="card mb-3">
+            <h6> <%=news[i].created.getDate()%>. <%=news[i].created.getMonth()+1%>. <%=news[i].created.getFullYear()%></h6>    
+            <p ><%=news[i].body%></p>
+        </div>
+        <% } %>
+     </div>
+     <% } %>
+        </div>
+   
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Закрыть</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a href="#" class="nav-link active" aria-current="page">Home</a>
+            <a href="/animals" class="nav-link">Наши животные</a>
+            <% if(!currentUser) { %>
+            <a href="/login" class="nav-link">Войти</a>
+            <a href="/register" class="nav-link">Зарегистрироваться</a>
+            <% } else { %>
+            <a href="/logout" class="nav-link">Выйти</a>
+            <% } %>
+          </nav>
+        </div>
+      </header>
+      <main class="px-3 ">
+        <h1 class="">Wild Animals</h1>
+        <p class="lead">
+          Welcome to WildAnimals World! <br />
+          Приглашаем посмотреть и участвовать в проекте WildAnimals ("Дикие животные"). <br />
+          Цель проекта - узнать больше о редких животных, которые живут рядом с нами,<br /> и помочь узнать другим.
+        </p>
+        <a
+          href="/animals"
+          class="btn btn-lg btn-success font-weight-bold"
+          >Посмотри, какие животные у нас есть!</a
+        >
+      </main>
+      <footer class="mt-auto text-white-50">
+<p>&copy; 2022 WildAnimals</p>
+      </footer>
+    </div>
+    <a class="fixed-bottom text-white text-start mb-2" href="https://www.flaticon.com/ru/free-icons/" title="лиса иконки">Лиса иконки от Freepik - Flaticon</a>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

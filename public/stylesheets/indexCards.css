@@ -1,0 +1,93 @@
+h1.extinct {
+    background-color: #220901;  
+}
+h1.endangered {
+    background-color: #941b0c;
+}
+h1.vulnerable {
+    background-color: #e4640f;
+}
+h1.dependant {
+    background-color: #f6aa1c; 
+}
+h1.least-concern {
+   background-color: #20b339; 
+}
+h1.not-defined {
+    background-color: #0a9396;
+}
+.status {
+    border: solid;
+}
+.extinct {
+    border-color: #220901;
+    border-width: 5px;   
+}
+.endangered {
+    border-color: #941b0c;
+    border-width: 5px;   
+}
+.vulnerable {
+    border-color: #e4640f;
+    border-width: 5px;   
+}
+.dependant {
+    border-color: #f6aa1c;
+    border-width: 5px;   
+}
+.least-concern {
+    border-color: #20b339;
+    border-width: 5px;   
+}
+.not-defined {
+    border-color: #0a9396;
+    border-width: 5px; 
+}
+/* .status h5 {
+   
+} */
+
+
+.areal img {
+    width: 18rem;
+}
+
+.moderate-new {
+    border-color: rgb(224, 54, 173);
+    border-width: 5px;   
+}
+
+.carousel {
+     max-height: 400px;
+     overflow: hidden;  
+}
+.carousel-item img {
+     width: 100%;
+     height: auto;
+} 
+.one-image {
+    max-width: 100%;
+    max-height: 400px;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+.areal {
+    border: 2px solid gray;
+    max-width: 100%;
+    max-height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#cluster-map {
+    width: 100%;
+    height: 500px;
+}
+#map {
+    width: 100%;
+    height: 300px;
+}
+a {
+    text-decoration: none;
+    color:#000;
+}

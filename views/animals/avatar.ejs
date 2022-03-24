@@ -1,0 +1,19 @@
+<% layout("layouts/boilerplate")%>
+        
+        <!-- avatar -->
+        <div class="row">
+            <h1 class="text-center">Avatar</h1>
+            <div class="col-md-6 offset-md-3">
+              <form action="/animals/<%=animal._id%>?_method=PATCH" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div class="mb-3">
+        <label class="form-label mb-3" for="avatar">Аватар:</label>
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="avatar" name="avatar">
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-success">Добавить</button>
+          </div>
+        </div>
+
+        </form>
+        </div>
