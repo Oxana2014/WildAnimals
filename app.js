@@ -17,8 +17,8 @@ const animalsRouter = require('./routes/animals')
 const additionsRouter = require('./routes/additions')
 const usersRouter = require('./routes/users');
 const mongoSanitize = require('express-mongo-sanitize')
-//const dbUrl = process.env.DB_URL;
-const dbUrl = 'mongodb://localhost:27017/wild-animals';
+
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/wild-animals';
 
 const MongoStore = require('connect-mongo');
 
@@ -48,14 +48,11 @@ app.use(mongoSanitize({
     replaceWith: '_',
   }))
 
-//   const store = new MongoStore({
-//       url: dbUrl,
-//       secret: "4G_class",
-//       touchAfter: 24*3600
-//   })
+  const secret = process.env.SECRET || "4G_class";
+
 const options = {
           mongoUrl: dbUrl,
-           secret: "4G_class",
+           secret,
           touchAfter: 24*3600
       }
      const store = MongoStore.create(options);
@@ -67,7 +64,7 @@ const options = {
 const sessionConfig = {
     store,
     name: "_lacos",
-    secret: "4G_class",
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
