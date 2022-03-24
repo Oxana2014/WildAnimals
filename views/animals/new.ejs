@@ -1,0 +1,112 @@
+<% layout("layouts/boilerplate")%>
+
+<div class="row">
+  <h1 class="text-center mb-3">Добавить новый вид</h1>
+  
+  <a class="btn btn-primary col-md-6 offset-md-3 mb-3" data-bs-toggle="offcanvas" href="#offcanvasInstruction" role="button" aria-controls="offcanvasInstruction">
+    <h5> Как правильно добавить вид</h5> 
+<p class="text-warning">!!! Обязательно прочитай, если делаешь это впервые или что-то забыл.</p>
+<p>Если потом решишь добавить что-то, ты всегда сможешь это сделать после публикации</p> 
+</a>
+  <!-- offcanvas -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasInstruction" aria-labelledby="offcanvasInstructionLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasInstructionLabel">Как добавить новый вид</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <h5>Важно!!!</h5>
+      <div>
+       Нужная нам информация и фотографии размещенны на интернет-ресурсах. У всех их есть адрес, который нам понадобится
+    <div class="my-3 ">
+       <img src="/assets/address.png" alt="">
+       </div>
+       <ol>
+       <li> <h5>Определи вид животного.</h5>
+      <p>Например, в Википедии ты узнаешь, что лиса - это не вид, а целая группа видов, куда входят Фенек, Южноамериканская лисица, Полярная лисица и т.д. <br>
+         Допустим, тебя заинтересовала <strong> полярная лисица</strong>.   </p> 
+     </li>
+     <li>
+       <h5>Найди страничку в Википедии о выбранном виде. Познакомься с ним поближе.</h5>
+       <p>Оказывается, Полярная лисица и Песец - разные названия одного и того же вида.</p>
+     </li>
+     <li>
+      <h5>Там же определи охранный статус этого вида.</h5>
+      <img src="/assets/status.png" alt="">
+      <p>Как видим, в соответствии с "Красной книгой" у песца охранный статус <strong>"Вызывающие наименьшее опасение"</strong> </p>
+    </li>
+    <li>
+      <h5>Найди и скачай несколько фотографий выбранного вида в отдельную папку.</h5>
+    <p>Не забудь сохранить адреса сайтов, откуда эти фото.</p>
+    </li>
+    <li>
+      <h5>Выбери информацию о виде, которую будет интересно узнать другим участникам проекта.</h5>
+    </li>
+    <li>
+      <h5>Всё готово! Заполни форму, загрузи фото (не больше 4).</h5>
+    </li>
+    <li>
+      <h5>Укажи адреса сайтов, откуда взята информация и фото.</h5>
+      <p> Например, Википедия, https://web-zoopark.ru, https://wildlife-ru.livejournal.com </p>
+    </li>
+    <li>
+      <h5>Проверь, что все поля заполнены. <br> Нажми кнопку "Добавить"</h5>
+    </li>
+     </ol>
+      </div>
+    
+    </div>
+  </div>
+<!-- end of offcanvas -->
+
+  <div class="col-md-6 offset-md-3">
+    <div class="card shadow">
+      <div class="card-body">
+    <form action="/animals" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">Название</label>
+        <input type="text" id="title" name="animal[title]" class="form-control" autofocus required />
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label" id="status" name="animal[status]">Охранный статус </label>
+        <select class="form-select" aria-label="Default select example" id="status" name="animal[status]" >
+            <option value="not-defined" selected>Выбери охранный статус животного в Красной Книге</option>
+            <option value="extinct">Исчезнувшие в дикой природе</option>
+            <option value="endangered">Вымирающие виды</option>
+            <option value="vulnerable">Уязвимые виды</option>
+            <option value="dependant">Зависимы от усилий по сохранению</option>
+            <option value="least-concern">Вызывающие наименьшие опасения</option>
+          </select>
+      </div>
+      <div class="mb-3">
+        <label for="areal" class="form-label">Где обитает: </label>
+        <input type="text" id="areal" name="animal[areal]" class="form-control"  required />
+      </div>
+      <!-- <div class="mb-3">
+        <label for="location" class="form-label">Где встречается чаще всего(значок на карту): </label>
+        <input type="text" id="location" name="animal[location]" class="form-control" required />
+      </div> -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Описание</label>
+        <textarea type="text" id="description" name="animal[description]" class="form-control" required></textarea> 
+      </div>
+      <label class="form-label mb-3" for="image">Загрузи фото (не больше 4)</label>
+      <div class="input-group mb-3">
+        <input type="file" class="form-control" id="image" name="image" multiple>
+      </div>
+      <div class="mb-3">
+        <label for="source" class="form-label" >Источник информации</label>
+        <input type="text" id="source" name="animal[source]" class="form-control" required />
+      </div>
+      <div class="mb-3">
+      <button class="btn btn-success">Добавить</button>
+    </div>
+    </form>
+    <div>
+      <a href="/animals">Все животные</a>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+

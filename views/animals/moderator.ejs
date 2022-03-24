@@ -1,0 +1,112 @@
+<% layout("layouts/boilerplate")%>
+
+<h3 class="text-success">We have now <strong><%=numUsers%></strong> users.</h3>
+<div class="row">
+
+    <div class="col-md-6 offset-md-3">
+
+<h2 class="text-center mb-5">New Animals to Moderate</h2>
+<div class="container text-center mb-5">
+    <p class="mb-5">There are <%= newAnimals.length %> new animals to moderate</p>
+    <% if(newAnimals.length > 0) { %>
+        <div class="list-group ">
+        <% for (let animal of newAnimals) { %>
+<a href="/animals/<%=animal._id%>/edit"  class="list-group-item list-group-item-action text-center bg-success mb-2 text-light">    
+    <%=animal.title%>
+</a>
+       <% } %>
+    </div>
+    <% } %>
+</div>
+<h2 class="text-center mb-3">New Additions</h2>
+<div class="container text-center mb-5">
+    <p class="mb-3">There are <%= newAdditions.length %> new additions to moderate</p>
+    <% if(newAdditions.length > 0) { %>
+        <div class="list-group ">
+        <% for (let addition of newAdditions) { %>
+<a href="/animals/<%=addition.animal%>/additions/<%=addition._id%>/editAddition"  class="list-group-item list-group-item-action text-center bg-info mb-2 text-dark">    
+    addition
+</a>
+       <% } %>
+    </div>
+    <% } %>
+</div>
+
+<h2 class="text-center mb-3">New feedbacks</h2>
+<div class="container text-center mb-5">
+    <p class="mb-3">
+        There are <%=newFeedbacks.length%> new feedbacks to read.
+    </p>
+    <% if(newFeedbacks.length > 0) { %>
+        <div class="list-group ">
+        <% for (let feedback of newFeedbacks) { %>
+<div class="card mb-3 border-success">
+    <h5 class="card-title"> Автор: <%=feedback.username%></h5>
+    <div class="card-body">
+    <p ><%=feedback.body%></p>
+    <!-- <h5><%=feedback.address%></h5> -->
+
+<a class="card-link btn btn-success" href="/writeUs/<%=feedback._id%>/useful"
+    >Хорошая идея, надо сохранить!</a
+  >
+  <a class="card-link btn btn-secondary" href="/writeUs/<%=feedback._id%>/old"
+    >Не пригодится</a
+  >
+ 
+   
+</div>
+</div>
+       <% } %>
+    </div>
+    <% } %>
+</div>
+
+<div class="container text-center mb-5">
+    <p class="mb-3">
+        There are <%=usefulFeedbacks.length%> useful advices.
+    </p>
+<p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapsedFeedbacks" role="button" aria-expanded="false" aria-controls="collapsedFeedbacks">
+      Полезные советы наших участников
+    </a>
+  </p>
+  <div class="collapse" id="collapsedFeedbacks">
+    <div class="card card-body">
+        <% if(usefulFeedbacks.length > 0) { %>
+            <div class="list-group ">
+            <% for (let feedback of usefulFeedbacks) { %>
+    <div class="card mb-3 border-success">
+        <h5 > Автор: <%=feedback.username%></h5>    
+        <p ><%=feedback.body%></p>
+    </div>
+    <% } %>
+ </div>
+ <% } %>
+    </div>
+  </div>
+</div>
+
+
+<div class="container text-center mb-5">
+<p>
+    <a class="btn btn-info" data-bs-toggle="collapse" href="#collapsedNewsForm" role="button" aria-expanded="false" aria-controls="collapsedNewsForm">
+      Создать новость
+    </a>
+  </p>
+  <div class="collapse" id="collapsedNewsForm">
+    <div class="card card-body">
+      <div class="card-body">
+ 
+          <form action="/news" method="POST" class=" d-block validated-form" novalidate> 
+           <textarea name="news[body]" id="body" cols="40" rows="5" required></textarea>
+        
+          <button class="btn btn-success d-inline">Publish</button>
+        </form>
+          </div>
+      </div>          
+ </div>
+
+    </div>
+  </div>
+</div>
+

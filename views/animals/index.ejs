@@ -1,0 +1,34 @@
+<% layout("layouts/boilerplate")%>
+
+<div id="cluster-map"></div>
+
+    <!-- <h1 class="text-center">All Animals</h1> -->
+   
+    <div class="card-group mt-4">
+       <% for(let animal of animals) { %>
+        <div class="col">
+        <a href="/animals/<%=animal._id %>">
+        <div class="card mb-3 <%=animal.status%>" style="width: 12rem;">
+ <% if(animal.avatar) { %>
+    <img src="<%=animal.avatar.url%>" alt="" class="img-fluid">
+    <% } else if(animal.images.length) { %>
+            <img src="<%=animal.images[0].thumbnail%>" alt="" class="img-fluid">
+            <% } else { %>
+            <img src='https://res.cloudinary.com/dswqbj1l9/image/upload/v1646999135/WildAnimals/izrk7rpanqi2jnwxtmc1.jpg' alt="" class="card-img-top">
+            <% } %>
+            <div class="card-body">
+            <h5 class="card-title text-center ">
+                <%=animal.title %>
+            </h5>
+            </div>
+        </div>               
+         </a> 
+         </div>                
+        <% } %>
+    </div>
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const animals = {features: <%-JSON.stringify(animals)%>}
+      </script>
+    <script src="/javascripts/clusterMap.js"></script>

@@ -1,0 +1,145 @@
+<% layout("layouts/boilerplate")%>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="text-center <%=animal.status%> mb-3 text-white pb-2"><%= animal.title %></h1>
+    <% if(animal.images.length > 1) { %> 
+    
+
+    <div
+      id="WildAnimalsCarousel"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <% animal.images.forEach((image, i) => { %>
+        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+          <img src="<%=image.url%>" class="d-block w-100" alt="" />
+        </div>
+        <% }) %>
+      </div>
+      <% if(animal.images.length > 1) { %>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#WildAnimalsCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#WildAnimalsCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <% } %>
+    </div>
+    <% } else if(animal.images.length === 1) { %>
+      <img src="<%=animal.images[0].url%>" class="d-block one-image " alt="" />
+      <% } %>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text"><%= animal.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-muted">
+          Место обитания: <%= animal.areal %>
+        </li>
+        <% if(animal.map) { %>
+          <div >
+            <h6>Ареал обитания на карте:</h6>
+            <img src="<%=animal.map%>" alt="" class="one-image areal" />
+            <p>Источник: Википедия</p>
+          </div>
+          <% } %>
+        <li class="list-group-item ">
+          Значок на карте: <%= animal.location %>
+        </li>
+        <div id="map" ></div>
+
+        <li class="list-group-item">Охранный статус: <%= animal.status %></li>
+        <li class="list-group-item">Автор: <%= animal.author.username %></li>
+        <li class="list-group-item">
+          Источник информации: <%= animal.source %>
+        </li>
+      </ul>
+    </div>
+  
+
+    <!-- additions to moderate -->
+    <h3>Аddition to moderate</h3>
+    <% if (currentUser && currentUser.role === "moderator") { %>
+      <div class="card moderate-new"> 
+  
+    <form
+      class="mb-3 validated-form "
+      action="/animals/<%=animal._id%>/additions/<%=addition._id%>?_method=PUT"
+      method="POST"
+      
+      novalidate
+    >
+      <div class="mb-3">
+        <label class="form-label" for="body">
+          Описание</label
+        >
+        <textarea
+          class="form-control"
+          name="addition[body]"
+          id="body"
+          cols="30"
+          rows="3"
+          required
+        ><%=addition.body%></textarea>
+      </div>
+
+      <div class="mb-3">
+        <% addition.images.forEach(function(img, i) { %>
+          <div class="mb-3 d-inline-block">
+          <img src="<%=img.foredit%>" >
+          <div class="form-check-inline">
+          <input  type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">         
+          <label class="form-check-label" for="image-<%=i%>">
+            Удалить?
+            </div>
+            <% if (!img.vertical) { %>
+              <div class="form-check-inline">
+                <input  type="checkbox" id="v-image-<%=i%>" name="verticalImages[]" value="<%=img.url%>">         
+                <label class="form-check-label" for="v-image-<%=i%>">
+                  Вертикально?
+                  </div>
+              <% } %>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="source"
+          >Источники информации:</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          name="addition[source]"
+          id="source"
+          value="<%=addition.source%>"
+          required
+        />
+      </div>
+      <button class="btn btn-success">Publish</button>
+    </form>
+  </div> 
+    <% } %>
+
+</div>
+</div>
+<script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const animal = <%-JSON.stringify(animal)%>
+</script>
+<script src="/javascripts/showPageMap.js"></script>
