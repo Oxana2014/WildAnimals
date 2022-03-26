@@ -8,6 +8,7 @@
     Array.from(forms)
       .forEach(function (form) {
         form.addEventListener('submit', function (event) {
+        //  console.dir(form)
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
