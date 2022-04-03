@@ -6,13 +6,13 @@
        <% for(let animal of animals) { %>
         <div class="col">
         <a href="/animals/<%=animal._id %>">
-        <div class="card mb-3 <%=animal.status%>" style="width: 12rem;">
+        <div class="card mb-3 <%=animal.status%> card-index" style="width: 12rem;">
  <% if(animal.avatar) { %>
-    <img src="<%=animal.avatar.url%>" alt="" class="img-fluid">
+    <img src="<%=animal.avatar.url%>" alt="" class="img-fluid img-index">
     <% } else if(animal.images.length) { %>
-            <img src="<%=animal.images[0].thumbnail%>" alt="" class="img-fluid">
+            <img src="<%=animal.images[0].thumbnail%>" alt="" class="img-fluid img-index">
             <% } else { %>
-            <img src='https://res.cloudinary.com/dswqbj1l9/image/upload/v1646999135/WildAnimals/izrk7rpanqi2jnwxtmc1.jpg' alt="" class="card-img-top">
+            <img src='https://res.cloudinary.com/dswqbj1l9/image/upload/v1646999135/WildAnimals/izrk7rpanqi2jnwxtmc1.jpg' alt="" class="img-fluid img-index">
             <% } %>
             <div class="card-body">
             <h5 class="card-title text-center ">

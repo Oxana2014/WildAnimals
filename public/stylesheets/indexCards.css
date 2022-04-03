@@ -91,3 +91,10 @@ a {
     text-decoration: none;
     color:#000;
 }
+.img-index {
+    height: 200px;
+    width: auto;
+}
+.card-index {
+    height: 288px;
+}
