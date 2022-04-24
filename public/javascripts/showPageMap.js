@@ -22,4 +22,8 @@ console.log("coordinates: ", animal.geometry.coordinates)
       )
   )
   .addTo(map)
+      } else {
+        //mobile device without map
+        const container = document.querySelector("#map");
+ container.style.height = 0;
       }

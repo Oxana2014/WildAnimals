@@ -121,4 +121,12 @@ map.on("load", () => {
     map.getCanvas().style.cursor = "";
   });
 });
+} else {
+  //mobile device without map
+  const container = document.querySelector("#cluster-map");
+  const invitation = document.createElement("h3");
+  const content = document.createTextNode("Заходи на наш сайт с компьютера и ты найдешь животных на карте!!!");
+  invitation.appendChild(content);
+  container.appendChild(invitation);
+  container.style.height = auto;
 }
