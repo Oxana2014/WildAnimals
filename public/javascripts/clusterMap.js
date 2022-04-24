@@ -124,9 +124,10 @@ map.on("load", () => {
 } else {
   //mobile device without map
   const container = document.querySelector("#cluster-map");
-  const invitation = document.createElement("h3");
+  const invitation = document.createElement("div");
+  invitation.className="alert text-center alert-success alert-dismissible fade show";
   const content = document.createTextNode("Заходи на наш сайт с компьютера и ты найдешь животных на карте!!!");
   invitation.appendChild(content);
   container.appendChild(invitation);
-  container.style.height = auto;
-}
+  container.style.height = "auto"; 
+ }
