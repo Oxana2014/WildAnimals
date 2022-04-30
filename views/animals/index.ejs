@@ -6,7 +6,7 @@
        <% for(let animal of animals) { %>
         <div class="col">
         <a href="/animals/<%=animal._id %>">
-        <div class="card mb-3 <%=animal.status%> card-index" style="width: 12rem;">
+        <div class="card mb-3 <%=animal.status%> card-index">
  <% if(animal.avatar) { %>
     <img src="<%=animal.avatar.url%>" alt="" class="img-fluid img-index">
     <% } else if(animal.images.length) { %>
